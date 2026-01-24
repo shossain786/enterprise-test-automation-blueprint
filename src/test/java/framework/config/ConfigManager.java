@@ -10,6 +10,7 @@ public final class ConfigManager {
         properties.setProperty("browser", System.getProperty("browser", "chrome"));
         properties.setProperty("baseUrl", System.getProperty("baseUrl", "https://example.com"));
         properties.setProperty("headless", System.getProperty("headless", "false"));
+        properties.setProperty("apiBaseUrl", System.getProperty("apiBaseUrl", "https://jsonplaceholder.typicode.com"));
     }
 
     private ConfigManager() {
