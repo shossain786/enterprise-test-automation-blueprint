@@ -14,7 +14,7 @@ import framework.api.base.BaseApiTest;
 public class CreatePostApiTest extends BaseApiTest {
     public static final Logger logger = LogManager.getLogger(CreatePostApiTest.class.getName());
 
-    @Test
+    @Test(groups = {"api"})
     public void createPostApiTest() {
         CreatePostRequest request = new CreatePostRequest(
                 "automation blueprint",

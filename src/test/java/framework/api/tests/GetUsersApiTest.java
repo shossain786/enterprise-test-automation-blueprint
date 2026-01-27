@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 public class GetUsersApiTest extends BaseApiTest {
     private static final Logger logger = LogManager.getLogger(GetUsersApiTest.class);
 
-    @Test
+    @Test(groups = {"api", "smoke"})
     public void shouldReturnListOfUsersForValidPage() {
         Response response = ApiClient.get("/users");
         logger.info("Status Code: {}", response.getStatusCode());
