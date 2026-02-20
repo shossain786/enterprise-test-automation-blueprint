@@ -8,7 +8,7 @@ public final class ConfigManager {
 
     static {
         properties.setProperty("browser", System.getProperty("browser", "chrome"));
-        properties.setProperty("baseUrl", System.getProperty("baseUrl", "https://myurl.com"));
+        properties.setProperty("baseUrl", System.getProperty("baseUrl", "https://panjatan.netlify.app/"));
         properties.setProperty("headless", System.getProperty("headless", "false"));
         properties.setProperty("apiBaseUrl", System.getProperty("apiBaseUrl", "https://jsonplaceholder.typicode.com"));
     }
