@@ -1,6 +1,7 @@
 package framework.ui.pages;
 
 import framework.base.BaseTest;
+import framework.ui.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,11 @@ public class LoginPage extends BaseTest {
     By formsLink = By.linkText("Forms");
     By usernameError = By.id("usernameError");
     By passwordError = By.id("passwordError");
+
+    public boolean isPageLoaded() {
+        WaitUtils.waitForVisible(driver, username);
+        return driver.findElement(username).isDisplayed();
+    }
 
     public void login(String user, String pass) {
         driver.findElement(username).sendKeys(user);

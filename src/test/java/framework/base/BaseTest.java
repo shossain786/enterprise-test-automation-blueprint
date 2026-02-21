@@ -2,6 +2,8 @@ package framework.base;
 
 import framework.config.ConfigManager;
 import framework.driver.DriverManager;
+import framework.ui.utils.ScreenshotUtil;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -14,7 +16,13 @@ public abstract class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
+            ScreenshotUtil.takeScreenShot(
+                    DriverManager.getDriver(),
+                    result.getMethod().getMethodName()
+            );
+        }
         DriverManager.quitDriver();
     }
 }
