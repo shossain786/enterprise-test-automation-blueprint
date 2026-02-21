@@ -15,13 +15,12 @@ public class ScreenshotUtil {
     private ScreenshotUtil() {}
 
     public static void takeScreenShot(WebDriver driver, String testName) {
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
         try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             Path destination = Paths.get("target/screenshots/" + testName + ".png");
             Files.createDirectories(destination.getParent());
             Files.copy(screenshot.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Could not take screenshot.\n" + e.getMessage());
         }
     }

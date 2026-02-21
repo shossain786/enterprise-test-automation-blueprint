@@ -3,11 +3,14 @@ package framework.base;
 import framework.config.ConfigManager;
 import framework.driver.DriverManager;
 import framework.ui.utils.ScreenshotUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
+    private static final Logger logger = LogManager.getLogger(BaseTest.class);
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -24,5 +27,13 @@ public abstract class BaseTest {
             );
         }
         DriverManager.quitDriver();
+    }
+
+    public static void waitTime(int sec) {
+        try {
+            Thread.sleep(sec * 1000L);
+        } catch (InterruptedException e) {
+            logger.error("Interrupted while waiting for sleep.\n{}", e.getMessage());
+        }
     }
 }

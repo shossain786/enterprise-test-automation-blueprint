@@ -14,4 +14,9 @@ public final class WaitUtils {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+    public static void waitForAlert(WebDriver driver) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.alertIsPresent());
+    }
 }
