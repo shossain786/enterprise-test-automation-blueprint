@@ -5,17 +5,20 @@ import framework.driver.DriverManager;
 import framework.ui.utils.ScreenshotUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public abstract class BaseTest {
     private static final Logger logger = LogManager.getLogger(BaseTest.class);
+    protected WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         DriverManager.initDriver();
-        DriverManager.getDriver().get(ConfigManager.get("baseUrl"));
+        driver = DriverManager.getDriver();
+        driver.get(ConfigManager.get("baseUrl"));
     }
 
     @AfterMethod(alwaysRun = true)

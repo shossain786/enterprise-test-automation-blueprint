@@ -25,7 +25,7 @@ public class LoginUiTest extends BaseTest {
     )
     public void negativeLoginTest() {
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
-        loginPage.login("admin1", "password");
+        loginPage.login("admin", "password");
         Assert.assertEquals(loginPage.loginSuccessMessage(), "Login successful!");
     }
 }
