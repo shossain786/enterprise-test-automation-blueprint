@@ -1,6 +1,6 @@
 package framework.api.base;
 
-import framework.config.ConfigManager;
+import framework.core.base.config.ConfigManager;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 

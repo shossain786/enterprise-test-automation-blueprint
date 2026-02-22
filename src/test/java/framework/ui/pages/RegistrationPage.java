@@ -1,6 +1,6 @@
 package framework.ui.pages;
 
-import framework.base.BaseTest;
+import framework.core.base.BaseTest;
 import framework.ui.utils.WaitUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;

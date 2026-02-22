@@ -1,7 +1,7 @@
 package framework.ui.tests;
 
-import framework.base.BaseTest;
-import framework.driver.DriverManager;
+import framework.core.base.BaseTest;
+import framework.core.driver.DriverManager;
 import framework.ui.pages.RegistrationPage;
 import framework.ui.retry.RetryAnalyzer;
 import org.testng.Assert;

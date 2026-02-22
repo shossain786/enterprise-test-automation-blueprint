@@ -1,6 +1,6 @@
-package framework.driver;
+package framework.core.driver;
 
-import framework.config.ConfigManager;
+import framework.core.base.config.ConfigManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

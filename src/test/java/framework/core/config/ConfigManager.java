@@ -1,4 +1,4 @@
-package framework.config;
+package framework.core.base.config;
 
 import java.util.Properties;
 

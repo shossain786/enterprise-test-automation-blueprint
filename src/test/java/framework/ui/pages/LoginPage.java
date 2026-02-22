@@ -1,11 +1,10 @@
 package framework.ui.pages;
 
-import framework.base.BaseTest;
+import framework.core.base.BaseTest;
 import framework.ui.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 public class LoginPage extends BaseTest {
     private final WebDriver driver;

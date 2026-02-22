@@ -1,7 +1,7 @@
-package framework.base;
+package framework.core.base;
 
-import framework.config.ConfigManager;
-import framework.driver.DriverManager;
+import framework.core.base.config.ConfigManager;
+import framework.core.driver.DriverManager;
 import framework.ui.utils.ScreenshotUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
