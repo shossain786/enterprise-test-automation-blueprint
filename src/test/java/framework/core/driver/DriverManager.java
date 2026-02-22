@@ -20,6 +20,8 @@ public final class DriverManager {
 
             if (ConfigManager.getBoolean("headless")) {
                 options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
             }
 
             driver.set(new ChromeDriver(options));
