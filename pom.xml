@@ -50,6 +50,12 @@
             <version>3.0.4</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.utem</groupId>
+            <artifactId>utem-reporter-testng</artifactId>
+            <version>0.1.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

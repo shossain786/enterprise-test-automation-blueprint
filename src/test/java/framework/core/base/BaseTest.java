@@ -1,5 +1,6 @@
 package framework.core.base;
 
+import com.utem.reporter.testng.WebDriverRegistry;
 import framework.core.base.config.ConfigManager;
 import framework.core.driver.DriverManager;
 import framework.ui.utils.ScreenshotUtil;
@@ -19,6 +20,7 @@ public abstract class BaseTest {
         DriverManager.initDriver();
         driver = DriverManager.getDriver();
         driver.get(ConfigManager.get("baseUrl"));
+        WebDriverRegistry.register(driver);
     }
 
     @AfterMethod(alwaysRun = true)
@@ -30,6 +32,7 @@ public abstract class BaseTest {
             );
         }
         DriverManager.quitDriver();
+        WebDriverRegistry.unregister();
     }
 
     public static void waitTime(int sec) {
