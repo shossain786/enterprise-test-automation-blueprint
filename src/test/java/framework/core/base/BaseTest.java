@@ -11,6 +11,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+
 public abstract class BaseTest {
     private static final Logger logger = LogManager.getLogger(BaseTest.class);
     protected WebDriver driver;
@@ -31,8 +32,8 @@ public abstract class BaseTest {
                     result.getMethod().getMethodName()
             );
         }
-        DriverManager.quitDriver();
-        WebDriverRegistry.unregister();
+        // Driver cleanup is handled by DriverQuitListener (registered after UtemTestNGListener
+        // in testng.xml) so that UTEM can capture a screenshot before the driver is quit.
     }
 
     public static void waitTime(int sec) {

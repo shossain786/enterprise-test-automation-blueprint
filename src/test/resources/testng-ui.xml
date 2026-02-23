@@ -2,6 +2,7 @@
 <suite name="UI Test Suite" parallel="methods" thread-count="2">
     <listeners>
         <listener class-name="com.utem.reporter.testng.UtemTestNGListener"/>
+        <listener class-name="framework.ui.utils.DriverQuitListener"/>
     </listeners>
     <test name="UI Tests">
         <groups>

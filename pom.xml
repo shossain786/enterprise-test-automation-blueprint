@@ -66,7 +66,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng-ui.xml</suiteXmlFile>
-<!--                        <suiteXmlFile>src/test/resources/testng-api.xml</suiteXmlFile>-->
+                        <suiteXmlFile>src/test/resources/testng-api.xml</suiteXmlFile>
 <!--                        <suiteXmlFile>src/test/resources/testng-smoke.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                 </configuration>
