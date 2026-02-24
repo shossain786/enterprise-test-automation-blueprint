@@ -21,7 +21,11 @@ public abstract class BaseTest {
         DriverManager.initDriver();
         driver = DriverManager.getDriver();
         driver.get(ConfigManager.get("baseUrl"));
-        WebDriverRegistry.register(driver);
+        try {
+            WebDriverRegistry.register(driver);
+        } catch (NoClassDefFoundError ignored) {
+            // UTEM JAR not on classpath (CI environment) — skip registration
+        }
     }
 
     @AfterMethod(alwaysRun = true)
