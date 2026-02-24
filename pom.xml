@@ -81,4 +81,29 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <!-- Activate with -Pci (used in GitHub Actions and Jenkins).
+                 Removes the UTEM JAR from the surefire test classpath so the
+                 SPI-registered UtemTestNGListener is never loaded and no
+                 "Send failed" attempts are made against the local-only server. -->
+            <id>ci</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <configuration>
+                            <classpathDependencyExcludes>
+                                <classpathDependencyExclude>com.utem:utem-reporter-testng</classpathDependencyExclude>
+                            </classpathDependencyExcludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
