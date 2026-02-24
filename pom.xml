@@ -83,19 +83,46 @@
     </build>
 
     <profiles>
+        <!--
+          CI profiles use combine.self="override" to REPLACE (not merge with)
+          the base surefire config, so testng-ui.xml (which declares the
+          SPI-auto-loaded UtemTestNGListener) is never picked up in CI.
+        -->
         <profile>
-            <!-- Activate with -Pci (used in GitHub Actions and Jenkins).
-                 Removes the UTEM JAR from the surefire test classpath so the
-                 SPI-registered UtemTestNGListener is never loaded and no
-                 "Send failed" attempts are made against the local-only server. -->
-            <id>ci</id>
+            <!-- Used by the api-tests CI job: mvn test -Pci-api -->
+            <id>ci-api</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>3.5.2</version>
-                        <configuration>
+                        <configuration combine.self="override">
+                            <suiteXmlFiles>
+                                <suiteXmlFile>src/test/resources/testng-api.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                            <classpathDependencyExcludes>
+                                <classpathDependencyExclude>com.utem:utem-reporter-testng</classpathDependencyExclude>
+                            </classpathDependencyExcludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- Used by the ui-tests CI job: mvn test -Pci-ui -->
+            <id>ci-ui</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.5.2</version>
+                        <configuration combine.self="override">
+                            <suiteXmlFiles>
+                                <!-- testng-ui-ci.xml has no UtemTestNGListener declaration -->
+                                <suiteXmlFile>src/test/resources/testng-ui-ci.xml</suiteXmlFile>
+                            </suiteXmlFiles>
                             <classpathDependencyExcludes>
                                 <classpathDependencyExclude>com.utem:utem-reporter-testng</classpathDependencyExclude>
                             </classpathDependencyExcludes>
