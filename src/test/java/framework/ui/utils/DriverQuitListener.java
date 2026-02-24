@@ -33,7 +33,11 @@ public class DriverQuitListener implements ITestListener {
     }
 
     private void cleanupDriver() {
-        WebDriverRegistry.unregister();
+        try {
+            WebDriverRegistry.unregister();
+        } catch (NoClassDefFoundError ignored) {
+            // UTEM JAR not on classpath (CI environment) — skip unregister
+        }
         DriverManager.quitDriver();
     }
 }
