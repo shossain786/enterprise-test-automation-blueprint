@@ -34,6 +34,13 @@ jobs:
   ui-tests:
     runs-on: ubuntu-latest
 
+    env:
+      # UTEM reporter reads this env var to know where to POST results.
+      # Set UTEM_SERVER_URL in GitHub → Settings → Secrets and variables → Actions.
+      # If the secret is absent the reporter falls back to localhost:8080 and
+      # logs "Send failed" warnings, but tests still run and results are correct.
+      UTEM_SERVER_URL: ${{ secrets.UTEM_SERVER_URL }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
