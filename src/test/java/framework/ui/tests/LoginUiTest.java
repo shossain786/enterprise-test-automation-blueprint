@@ -1,10 +1,10 @@
 package framework.ui.tests;
 
+import com.utem.reporter.testng.UtemSteps;
 import framework.core.base.BaseTest;
 import framework.core.driver.DriverManager;
 import framework.ui.pages.LoginPage;
 import framework.ui.retry.RetryAnalyzer;
-import framework.ui.utils.Steps;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,11 +16,11 @@ public class LoginUiTest extends BaseTest {
     )
     public void loginTest() {
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
-        Steps.step("I am on login page");
+        UtemSteps.step("I am on login page");
         loginPage.login("admin", "password");
-        Steps.step("I enter user name as 'admin' and password as 'password'");
+        UtemSteps.step("I enter user name as 'admin' and password as 'password'");
         Assert.assertEquals(loginPage.loginSuccessMessage(), "Login successful!");
-        Steps.step("Verified login success message 'Login successful!'");
+        UtemSteps.step("Verified login success message 'Login successful!'");
     }
 
     @Test(
