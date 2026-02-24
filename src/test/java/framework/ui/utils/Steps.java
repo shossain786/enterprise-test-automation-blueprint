@@ -1,19 +1,24 @@
 package framework.ui.utils;
 
-import com.utem.reporter.testng.UtemSteps;
+import java.lang.reflect.Method;
 
 /**
- * Thin wrapper around UtemSteps that silently no-ops in CI environments
- * where the UTEM JAR is excluded from the test classpath.
+ * Wrapper around UtemSteps that uses reflection so the UTEM class name
+ * is a plain String constant in the bytecode — the JVM has nothing to
+ * eagerly resolve at class-load time, and CI runs skip silently.
  */
 public final class Steps {
+
+    private static final String UTEM_STEPS_CLASS = "com.utem.reporter.testng.UtemSteps";
 
     private Steps() {}
 
     public static void step(String description) {
         try {
-            UtemSteps.step(description);
-        } catch (NoClassDefFoundError ignored) {
+            Class<?> cls = Class.forName(UTEM_STEPS_CLASS);
+            Method m = cls.getMethod("step", String.class);
+            m.invoke(null, description);
+        } catch (Exception ignored) {
             // UTEM JAR not on classpath (CI environment) — skip step reporting
         }
     }
