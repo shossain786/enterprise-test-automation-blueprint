@@ -50,11 +50,15 @@ jobs:
 
       - name: Run UI Test Suite (Headless)
         run: |
-          # Do NOT pass webdriver.chrome.driver — Selenium Manager auto-resolves
-          # the matching ChromeDriver version from the Chrome binary path.
+          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
+          # browser-actions installs the matching chromedriver alongside chrome
+          # in the same directory. Using it avoids Selenium Manager downloading
+          # a mismatched version from googlechromelabs.github.io.
+          CHROMEDRIVER="$(dirname "$CHROME_PATH")/chromedriver"
           mvn test -Pci-ui \
             -Dheadless=true \
-            "-Dchrome.binary=${{ steps.setup-chrome.outputs.chrome-path }}"
+            "-Dchrome.binary=$CHROME_PATH" \
+            "-Dwebdriver.chrome.driver=$CHROMEDRIVER"
 
       - name: Upload Screenshots on Failure
         if: failure()
