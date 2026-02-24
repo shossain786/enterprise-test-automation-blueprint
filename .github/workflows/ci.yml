@@ -46,10 +46,13 @@ jobs:
 
       - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
 
       - name: Run UI Test Suite (Headless)
         run: |
-          mvn test -Pci-ui -Dheadless=true
+          mvn test -Pci-ui \
+            -Dheadless=true \
+            -Dwebdriver.chrome.driver="${{ steps.setup-chrome.outputs.chromedriver-path }}"
 
       - name: Upload Screenshots on Failure
         if: failure()
