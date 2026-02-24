@@ -50,9 +50,15 @@ jobs:
 
       - name: Run UI Test Suite (Headless)
         run: |
+          # Prefer the action's chromedriver-path output; fall back to PATH.
+          CHROMEDRIVER="${{ steps.setup-chrome.outputs.chromedriver-path }}"
+          if [ -z "$CHROMEDRIVER" ]; then
+            CHROMEDRIVER="$(which chromedriver)"
+          fi
           mvn test -Pci-ui \
             -Dheadless=true \
-            -Dwebdriver.chrome.driver="${{ steps.setup-chrome.outputs.chromedriver-path }}"
+            "-Dwebdriver.chrome.driver=$CHROMEDRIVER" \
+            "-Dchrome.binary=${{ steps.setup-chrome.outputs.chrome-path }}"
 
       - name: Upload Screenshots on Failure
         if: failure()

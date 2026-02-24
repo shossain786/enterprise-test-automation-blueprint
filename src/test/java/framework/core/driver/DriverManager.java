@@ -18,6 +18,12 @@ public final class DriverManager {
         if (driver.get() == null) {
             ChromeOptions options = new ChromeOptions();
 
+            // Allow CI to supply the Chrome binary path via -Dchrome.binary=...
+            String chromeBinary = System.getProperty("chrome.binary");
+            if (chromeBinary != null && !chromeBinary.isBlank()) {
+                options.setBinary(chromeBinary);
+            }
+
             if (ConfigManager.getBoolean("headless")) {
                 options.addArguments("--headless=new");
                 options.addArguments("--no-sandbox");
