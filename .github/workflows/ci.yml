@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 25
@@ -56,4 +59,3 @@ jobs:
         with:
           name: ui-screenshots
           path: target/screenshots
-
