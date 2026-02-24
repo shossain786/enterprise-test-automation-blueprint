@@ -44,21 +44,15 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
-        id: setup-chrome
-
       - name: Run UI Test Suite (Headless)
         run: |
-          CHROME_PATH="${{ steps.setup-chrome.outputs.chrome-path }}"
-          # browser-actions installs the matching chromedriver alongside chrome
-          # in the same directory. Using it avoids Selenium Manager downloading
-          # a mismatched version from googlechromelabs.github.io.
-          CHROMEDRIVER="$(dirname "$CHROME_PATH")/chromedriver"
+          # ubuntu-latest runners ship Google Chrome (stable) and the matching
+          # chromedriver as a pre-installed pair — always the same version.
+          # Passing the system chromedriver path prevents Selenium Manager from
+          # attempting to download a potentially mismatched version.
           mvn test -Pci-ui \
             -Dheadless=true \
-            "-Dchrome.binary=$CHROME_PATH" \
-            "-Dwebdriver.chrome.driver=$CHROMEDRIVER"
+            "-Dwebdriver.chrome.driver=$(which chromedriver)"
 
       - name: Upload Screenshots on Failure
         if: failure()
